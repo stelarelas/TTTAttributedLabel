@@ -164,6 +164,8 @@ descriptionLabel.addLink(to: URL(string:"https://www.gov.uk/view-driving-licence
 
 Voilà!
 
+P.S: Don't forget to add `TTTAttributedLabelDelegate` to your controller in order to implement `didSelectLinkWith` callback.
+
 
 ## Demo
 
