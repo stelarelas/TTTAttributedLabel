@@ -138,6 +138,33 @@ NSRange range = [label.text rangeOfString:@"me"];
 [label addLinkToURL:[NSURL URLWithString:@"http://github.com/mattt/"] withRange:range]; // Embedding a custom link in a substring
 ```
 
+#### Swift 3 example
+
+Let's say we have the following label `Click here and chill` and we want to add a link on `here` in order to navigate somewhere.
+
+First, we have to create an outlet of our label: `@IBOutlet weak var descriptionLabel: TTTAttributedLabel!`.
+Then type cast our label's text as NSString in order to be able to get the range of the word "here".
+
+```
+let nsSting = descriptionLabel.text! as NSString
+let range = nsSting.range(of: "here")
+```
+
+If we want to customize our link, we have to add some link attributes. For example, it's color, font and tintColor.
+
+```
+descriptionLabel.linkAttributes = [NSForegroundColorAttributeName: HiyaCarStyleKit.lightBlueColor, NSFontAttributeName: UIFont(name: "ProximaNova-Bold", size: 11.0)!]
+descriptionLabel.activeLinkAttributes = [NSUnderlineColorAttributeName: HiyaCarStyleKit.lightBlueColor]
+```
+
+Finally, we have to add our link to the label.
+```
+descriptionLabel.addLink(to: URL(string:"https://www.gov.uk/view-driving-licence")!, with: range )
+```
+
+Voilà!
+
+
 ## Demo
 
 ```bash
