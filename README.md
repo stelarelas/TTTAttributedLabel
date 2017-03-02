@@ -140,10 +140,24 @@ NSRange range = [label.text rangeOfString:@"me"];
 
 #### Swift 3 example
 
-Let's say we have the following label `Click here and chill` and we want to add a link on `here` in order to navigate somewhere.
-
 First, we have to create an outlet of our label: `@IBOutlet weak var descriptionLabel: TTTAttributedLabel!`.
-Then type cast our label's text as NSString in order to be able to get the range of the word "here".
+
+Let's say we have the following label `Click here and chill` and we want to make `chill` bold.
+
+```
+descriptionLabel.setText(nsSting) { (mutableAttributedString) -> NSMutableAttributedString? in
+  let boldRange = nsSting.range(of: "chill")
+  mutableAttributedString?.addAttributes([NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "ProximaNova-Bold", size: 13.0)!], range: boldRange)
+
+  return mutableAttributedString
+}
+```
+So, we had to implement `setText` which returns an `NSMutableAttributedString`. Set the range of the bold text and add the desired attributes.
+
+
+Now, how about adding a link on `here` in order to navigate somewhere? Let's see how that goes:
+
+Start by type casting our label's text as NSString in order to be able to get the range of the word "here".
 
 ```
 let nsSting = descriptionLabel.text! as NSString
@@ -153,8 +167,8 @@ let range = nsSting.range(of: "here")
 If we want to customize our link, we have to add some link attributes. For example, it's color, font and tintColor.
 
 ```
-descriptionLabel.linkAttributes = [NSForegroundColorAttributeName: HiyaCarStyleKit.lightBlueColor, NSFontAttributeName: UIFont(name: "ProximaNova-Bold", size: 11.0)!]
-descriptionLabel.activeLinkAttributes = [NSUnderlineColorAttributeName: HiyaCarStyleKit.lightBlueColor]
+descriptionLabel.linkAttributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "ProximaNova-Bold", size: 11.0)!]
+descriptionLabel.activeLinkAttributes = [NSUnderlineColorAttributeName: UIColor.red]
 ```
 
 Finally, we have to add our link to the label.
